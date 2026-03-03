@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './hero.css';
-import farmBg from '../assets/farm-bg.jpeg';
+import "./Hero.css";
+import farmBg from "../../assets/farm-bg.jpeg";
 
 const Hero = () => {
   const navigate = useNavigate();

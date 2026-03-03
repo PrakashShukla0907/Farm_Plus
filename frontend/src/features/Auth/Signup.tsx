@@ -3,8 +3,8 @@ import { FaUser, FaMapMarkerAlt, FaMobileAlt, FaKey } from "react-icons/fa";
 import { MdLandscape } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, firebaseReady } from "../lib/firebase";
-import "./signup.css";
+import { auth, firebaseReady } from "../../lib/firebase";
+import "./Signup.css";
 
 const Signup = () => {
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
-import './CTABanner.css';
-import farmBg from '../assets/farm-bg.jpeg';
+import "./CTABanner.css";
+import farmBg from "../../assets/farm-bg.jpeg";
 import { useNavigate } from 'react-router-dom';
 
 const CTABanner = () => {

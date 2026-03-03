@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./livestock.css";
-import dairyImg from '../assets/dairy-contracts.jpg';
-import livestockImg from '../assets/livestock-marketplace.jpg';
+import "./Livestock.css";
+import dairyImg from "../../assets/dairy-contracts.jpg";
+import livestockImg from "../../assets/livestock-marketplace.jpg";
 import {
   predictAgroImpact,
   predictLivestock,
   type AgroImpactResponse,
   type LivestockResponse,
-} from "../lib/api";
+} from "../../lib/api";
 
 const LivestockCare = () => {
   const navigate = useNavigate();

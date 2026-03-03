@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './KnowledgeHub.css';
-import farmBg from '../assets/farm-bg.jpeg';
+import "./KnowledgehubPage.css";
+import farmBg from "../../assets/farm-bg.jpeg";
 
 const articles = [
   {

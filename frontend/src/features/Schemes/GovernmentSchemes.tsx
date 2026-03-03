@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './GovernmentSchemes.css';
-import farmBg from '../assets/farm-bg.jpeg';
+import "./GovernmentSchemes.css";
+import farmBg from "../../assets/farm-bg.jpeg";
 
 const schemes = [
   {

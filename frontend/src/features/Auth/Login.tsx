@@ -4,8 +4,8 @@ import { FaMobileAlt, FaLock } from "react-icons/fa";
 import { MdLanguage, MdVolumeUp } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
-import { auth, firebaseReady } from "../lib/firebase";
-import "./login.css";
+import { auth, firebaseReady } from "../../lib/firebase";
+import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
