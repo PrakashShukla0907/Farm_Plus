@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import "./Features.css";
 
 const CropIcon = () => (
@@ -45,35 +46,36 @@ const AlertIcon = () => (
 );
 
 const Features = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const features = [
     {
       icon: <CropIcon />,
-      title: 'Smart Advisory',
-      description: 'AI-driven crop & farming insights',
-      btnLabel: 'Predict Yield →',
+      title: t("home.features.cards.smartAdvisory.title"),
+      description: t("home.features.cards.smartAdvisory.desc"),
+      btnLabel: t("home.features.cards.smartAdvisory.btn"),
       onClick: () => navigate('/smart-advisory'),
     },
     {
       icon: <LivestockIcon />,
-      title: 'Livestock Health',
-      description: 'Monitor health & get recommendations',
-      btnLabel: 'Check Health →',
+      title: t("home.features.cards.livestockHealth.title"),
+      description: t("home.features.cards.livestockHealth.desc"),
+      btnLabel: t("home.features.cards.livestockHealth.btn"),
       onClick: () => navigate('/livestock-care'),
     },
     {
       icon: <TrendIcon />,
-      title: 'Marketplace & Trade',
-      description: 'Access prices, bids & export data',
-      btnLabel: 'View Prices →',
-      onClick: () => navigate('/market'),   // ← navigates to Market Dashboard
+      title: t("home.features.cards.marketPlace.title"),
+      description: t("home.features.cards.marketPlace.desc"),
+      btnLabel: t("home.features.cards.marketPlace.btn"),
+      onClick: () => navigate('/market'),
     },
     {
       icon: <AlertIcon />,
-      title: 'Government Schemes',
-      description: 'Explore subsidies & apply easily',
-      btnLabel: 'Explore Schemes →',
+      title: t("home.features.cards.govSchemes.title"),
+      description: t("home.features.cards.govSchemes.desc"),
+      btnLabel: t("home.features.cards.govSchemes.btn"),
       onClick: () => navigate('/government-schemes'),
     },
   ];

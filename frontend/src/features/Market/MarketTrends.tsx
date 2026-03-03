@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import "./MarketTrends.css";
 
 interface PriceData {
@@ -25,6 +26,7 @@ const DEFAULT_PRICE: PriceData = {
 };
 
 const MarketTrends = () => {
+  const { t } = useTranslation();
   const [priceData, setPriceData] = useState<PriceData>(DEFAULT_PRICE);
   const [live, setLive] = useState(false);
   const wsRef = useRef<WebSocket | null>(null);
@@ -54,9 +56,9 @@ const MarketTrends = () => {
     <section className="market-section">
       <div className="market-header">
         <span className="market-icon">📊</span>
-        <h2>Market Trends &amp; Trade</h2>
+        <h2>{t("home.marketTrends.title", "Market Trends & Trade")}</h2>
         <span className="live-badge" style={{ background: live ? '#ffe0e0' : '#eee', color: live ? '#c00' : '#888' }}>
-          {live ? '🔴 Live' : 'Offline'}
+          {live ? t("home.marketTrends.live", "🔴 Live") : t("home.marketTrends.offline", "Offline")}
         </span>
       </div>
 
@@ -64,45 +66,45 @@ const MarketTrends = () => {
         {/* LEFT: Price Card */}
         <div className="price-card">
           <div className="price-top">
-            <span className="price-label">🌾 Wheat Price</span>
-            <span className="price-main">₹{priceData.price}<span>/qtl</span></span>
-            <span className={`price-change ${priceData.changeType}`}>{priceData.changeType === 'positive' ? '▲' : '▼'} ₹{priceData.change} {priceData.changeType === 'positive' ? 'increase' : 'decrease'} today</span>
+            <span className="price-label">{t("home.marketTrends.wheatPrice", "🌾 Wheat Price")}</span>
+            <span className="price-main">₹{priceData.price}<span>{t("home.marketTrends.perQtl", "/qtl")}</span></span>
+            <span className={`price-change ${priceData.changeType}`}>{priceData.changeType === 'positive' ? '▲' : '▼'} ₹{priceData.change} {priceData.changeType === 'positive' ? t("home.marketTrends.increase", "increase") : t("home.marketTrends.decrease", "decrease")} {t("home.marketTrends.today", "today")}</span>
           </div>
 
           {/* Bar chart */}
           <div className="price-bars">
             <div className="bar-group">
               <div className="bar current" style={{ height: `${Math.min(100, (priceData.current / priceData.target) * 100)}%` }} />
-              <span>Current<br/>₹{priceData.current}/qtl</span>
+              <span>{t("home.marketTrends.current", "Current")}<br/>₹{priceData.current}{t("home.marketTrends.perQtl", "/qtl")}</span>
             </div>
             <div className="bar-group">
               <div className="bar target" style={{ height: '85%' }} />
-              <span>Target<br/>₹{priceData.target}/qtl</span>
+              <span>{t("home.marketTrends.target", "Target")}<br/>₹{priceData.target}{t("home.marketTrends.perQtl", "/qtl")}</span>
             </div>
             <div className="bar-group">
               <div className="bar max" style={{ height: `${Math.min(100, (priceData.max / priceData.target) * 100)}%` }} />
-              <span>Max<br/>₹{priceData.max}/qtl</span>
+              <span>{t("home.marketTrends.max", "Max")}<br/>₹{priceData.max}{t("home.marketTrends.perQtl", "/qtl")}</span>
             </div>
           </div>
 
           <div className="bar-legend">
-            <span><span className="dot current-dot"/>Current</span>
-            <span><span className="dot target-dot"/>Target</span>
-            <span><span className="dot max-dot"/>Max</span>
+            <span><span className="dot current-dot"/>{t("home.marketTrends.current", "Current")}</span>
+            <span><span className="dot target-dot"/>{t("home.marketTrends.target", "Target")}</span>
+            <span><span className="dot max-dot"/>{t("home.marketTrends.max", "Max")}</span>
           </div>
 
           <div className="price-actions">
-            <button className="btn-outline" onClick={() => navigate('/market')}>View Prices ›</button>
-            <button className="btn-solid" onClick={() => navigate('/market')}>Trade Market ›</button>
+            <button className="btn-outline" onClick={() => navigate('/market')}>{t("home.marketTrends.viewPrices", "View Prices ›")}</button>
+            <button className="btn-solid" onClick={() => navigate('/market')}>{t("home.marketTrends.tradeMarket", "Trade Market ›")}</button>
           </div>
         </div>
 
         {/* RIGHT: Import/Export */}
         <div className="import-card">
           <div className="import-header">
-            <span>🚛 Import/Export Data</span>
+            <span>{t("home.marketTrends.importExportData", "🚛 Import/Export Data")}</span>
           </div>
-          <div className="import-value">₹{priceData.importExport}Cr</div>
+          <div className="import-value">₹{priceData.importExport}{t("home.marketTrends.cr", "Cr")}</div>
 
           {/* Gauge */}
           <div className="gauge-wrapper">
@@ -120,15 +122,15 @@ const MarketTrends = () => {
               <circle cx="100" cy="100" r="6" fill="#333"/>
             </svg>
             <div className="gauge-labels">
-              <span>Low</span>
-              <span>Mid</span>
-              <span>High</span>
+              <span>{t("home.marketTrends.low", "Low")}</span>
+              <span>{t("home.marketTrends.mid", "Mid")}</span>
+              <span>{t("home.marketTrends.high", "High")}</span>
             </div>
           </div>
 
           <div className="import-meta">
-            <span>📅 2 Days Forecast</span>
-            <span className={`forecast-badge ${priceData.forecast.toLowerCase()}`}>{priceData.forecast}</span>
+            <span>{t("home.marketTrends.forecast2Days", "📅 2 Days Forecast")}</span>
+            <span className={`forecast-badge ${priceData.forecast.toLowerCase()}`}>{t(`home.marketTrends.${priceData.forecast.toLowerCase()}`, priceData.forecast)}</span>
           </div>
         </div>
       </div>

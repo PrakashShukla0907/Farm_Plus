@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import "./Navbar.css";
 import logo from "../../assets/logo.jpeg";
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -6,8 +7,14 @@ import { onAuthStateChanged, signOut, type User } from 'firebase/auth';
 import { auth, firebaseReady } from '../../lib/firebase';
 
 const Navbar = () => {
+  const { t, i18n } = useTranslation();
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
+
+  const toggleLanguage = () => {
+    const nextLang = i18n.language === 'en' ? 'hi' : 'en';
+    i18n.changeLanguage(nextLang);
+  };
 
   useEffect(() => {
     if (!firebaseReady || !auth) return;
@@ -38,13 +45,13 @@ const Navbar = () => {
 
       {/* NAV LINKS */}
       <ul className="nav-links">
-        <li><NavLink to="/" end>Home</NavLink></li>
-        <li><NavLink to="/smart-advisory">Smart Advisory</NavLink></li>
-        <li><NavLink to="/market">Market</NavLink></li>
-        <li><NavLink to="/livestock-care">Livestock Care</NavLink></li>
-        <li><NavLink to="/government-schemes">Government Schemes</NavLink></li>
-        <li><NavLink to="/knowledge-hub">Knowledge Hub</NavLink></li>
-        <li><NavLink to="/ai-models">AI Models</NavLink></li>
+        <li><NavLink to="/" end>{t('navbar.home')}</NavLink></li>
+        <li><NavLink to="/smart-advisory">{t('navbar.smartAdvisory')}</NavLink></li>
+        <li><NavLink to="/market">{t('navbar.market')}</NavLink></li>
+        <li><NavLink to="/livestock-care">{t('navbar.livestockCare')}</NavLink></li>
+        <li><NavLink to="/government-schemes">{t('navbar.govSchemes')}</NavLink></li>
+        <li><NavLink to="/knowledge-hub">{t('navbar.knowledgeHub')}</NavLink></li>
+        <li><NavLink to="/ai-models">{t('navbar.aiModels')}</NavLink></li>
       </ul>
 
       {/* RIGHT SIDE */}
@@ -87,10 +94,13 @@ const Navbar = () => {
         ) : (
           /* AUTH */
           <div className="nav-auth">
-            <NavLink to="/login" className="login-link">Login</NavLink>
-            <NavLink to="/signup" className="signup-btn">Sign Up</NavLink>
+            <NavLink to="/login" className="login-link">{t('navbar.login')}</NavLink>
+            <NavLink to="/signup" className="signup-btn">{t('navbar.signup')}</NavLink>
           </div>
         )}
+        <button className="lang-toggle-btn" onClick={toggleLanguage} style={{ marginLeft: '1rem', background: 'transparent', border: '1px solid #fff', color: '#fff', borderRadius: '4px', padding: '4px 8px', cursor: 'pointer' }}>
+          {i18n.language === 'en' ? 'हिंदी' : 'EN'}
+        </button>
       </div>
     </nav>
   );

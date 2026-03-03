@@ -1,0 +1,117 @@
+{
+ "navbar": {
+  "home": "Home",
+  "smartAdvisory": "Smart Advisory",
+  "market": "Market",
+  "livestockCare": "Livestock Care",
+  "govSchemes": "Government Schemes",
+  "knowledgeHub": "Knowledge Hub",
+  "aiModels": "AI Models",
+  "login": "Login",
+  "signup": "Sign Up"
+ },
+ "login": {
+  "welcomeBack": "Welcome Back!",
+  "subtitle": "Access your Smart Farming Dashboard",
+  "mobileEmailPlaceholder": "Mobile Number / Email",
+  "passwordPlaceholder": "Password",
+  "rememberMe": "Remember Me",
+  "forgotPassword": "Forgot Password?",
+  "signingIn": "Signing In...",
+  "logIn": "Log In",
+  "or": "or",
+  "noAccount": "Don't have an account?",
+  "signUpNow": "Sign Up Now"
+ },
+ "signup": {
+  "title": "Farmer Profile Creation",
+  "fullName": "Full Name",
+  "address": "Address",
+  "state": "State / Province",
+  "city": "City / District",
+  "landArea": "Total Land Area (Acres)",
+  "mobileNumber": "Mobile Number",
+  "email": "Email Address",
+  "password": "Password",
+  "enterOtp": "Enter OTP",
+  "sendOtp": "Send OTP",
+  "languagePref": "Language Preference",
+  "saveDetails": "Save Details",
+  "saving": "Saving...",
+  "alreadyAccount": "Already have an account?",
+  "loginNow": "Log In"
+ },
+ "home": {
+  "heroSection": {
+   "title": "Get AI-Driven Farm Insights",
+   "subtitle": "Smart Farming. Simple Decisions.",
+   "placeholder": "Enter your location for personalized insights",
+   "search": "Search",
+   "useLocation": "Use My Location",
+   "detecting": "Detecting...",
+   "featureOne": "AI-Powered Crop, Livestock & Market Analysis",
+   "featureTwo": "Real-Time Weather, Soil & Price Alerts",
+   "featureThree": "Government Schemes & Expert Advice"
+  },
+  "features": {
+   "title": "Smart Farming Features",
+   "subtitle": "Everything you need to optimize your agricultural yield.",
+   "cards": {
+    "smartAdvisory": {
+     "title": "Smart Advisory",
+     "desc": "AI-driven crop & farming insights",
+     "btn": "Predict Yield →"
+    },
+    "livestockHealth": {
+     "title": "Livestock Health",
+     "desc": "Monitor health & get recommendations",
+     "btn": "Check Health →"
+    },
+    "marketPlace": {
+     "title": "Marketplace & Trade",
+     "desc": "Access prices, bids & export data",
+     "btn": "View Prices →"
+    },
+    "govSchemes": {
+     "title": "Government Schemes",
+     "desc": "Explore subsidies & apply easily",
+     "btn": "Explore Schemes →"
+    }
+   }
+  },
+  "marketTrends": {
+   "title": "Market Trends & Trade",
+   "live": "🔴 Live",
+   "offline": "Offline",
+   "wheatPrice": "🌾 Wheat Price",
+   "perQtl": "/qtl",
+   "increase": "increase",
+   "decrease": "decrease",
+   "today": "today",
+   "current": "Current",
+   "target": "Target",
+   "max": "Max",
+   "viewPrices": "View Prices ›",
+   "tradeMarket": "Trade Market ›",
+   "importExportData": "🚛 Import/Export Data",
+   "low": "Low",
+   "mid": "Mid",
+   "high": "High",
+   "forecast2Days": "📅 2 Days Forecast",
+   "cr": "Cr"
+  },
+  "knowledgeHub": {
+   "title": "Knowledge Hub for Farmers",
+   "browseMore": "Browse More",
+   "videoGuide": "Video Guide",
+   "latestArticles": "Latest Articles",
+   "soilHealthTips": "Soil Health Tips",
+   "farmUpdates": "Farm Updates"
+  },
+  "ctaBanner": {
+   "title": "Stay Ahead, Farm Smart!",
+   "subtitle": "Join Farm+ for real-time insights, AI-driven decisions & better yields.",
+   "button": "Get AI Insights"
+  }
+ }
+}
