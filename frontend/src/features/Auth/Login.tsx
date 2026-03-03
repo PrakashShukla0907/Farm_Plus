@@ -3,11 +3,13 @@ import type { MouseEvent } from "react";
 import { FaMobileAlt, FaLock } from "react-icons/fa";
 import { MdLanguage, MdVolumeUp } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import { auth, firebaseReady } from "../../lib/firebase";
 import "./Login.css";
 
 const Login = () => {
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
@@ -60,6 +62,15 @@ const Login = () => {
     }
   };
 
+  const handleSpeak = () => {
+    if (!("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    const textToSpeak = `${t("login.welcomeBack")}, ${t("login.subtitle")}, ${t("login.mobileEmailPlaceholder")}, ${t("login.passwordPlaceholder")}, ${t("login.logIn")}.`;
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+    utterance.lang = i18n.language === "hi" ? "hi-IN" : "en-US";
+    window.speechSynthesis.speak(utterance);
+  };
+
   return (
     <div className="login-page">
       <div className="login-bg" />
@@ -73,15 +84,15 @@ const Login = () => {
             <span className="login-logo-text">Farm+</span>
           </div>
 
-          <h2 className="login-title">Welcome Back!</h2>
-          <p className="login-subtitle">Access your Smart Farming Dashboard</p>
+          <h2 className="login-title">{t("login.welcomeBack")}</h2>
+          <p className="login-subtitle">{t("login.subtitle")}</p>
 
           {/* Mobile / Email */}
           <div className="login-input-group">
             <span className="input-icon"><FaMobileAlt size={18} /></span>
             <input
               type="text"
-              placeholder="Mobile Number / Email"
+              placeholder={t("login.mobileEmailPlaceholder")}
               value={identifier}
               onChange={(e) => setIdentifier(e.target.value)}
             />
@@ -92,7 +103,7 @@ const Login = () => {
             <span className="input-icon"><FaLock size={18} /></span>
             <input
               type="password"
-              placeholder="Password"
+              placeholder={t("login.passwordPlaceholder")}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -103,26 +114,26 @@ const Login = () => {
           <div className="login-options">
             <label className="login-remember">
               <input type="checkbox" />
-              Remember Me
+              {t("login.rememberMe")}
             </label>
-            <a href="#" className="login-forgot" onClick={handleForgotPassword}>Forgot Password?</a>
+            <a href="#" className="login-forgot" onClick={handleForgotPassword}>{t("login.forgotPassword")}</a>
           </div>
 
           {/* Login Button */}
           <button className="login-btn" onClick={() => void handleLogin()} disabled={loading}>
-            {loading ? "Signing In..." : "Log In"}
+            {loading ? t("login.signingIn") : t("login.logIn")}
           </button>
 
           {message && <p className="login-subtitle">{message}</p>}
 
           {/* Divider */}
-          <div className="login-divider"><span>or</span></div>
+          <div className="login-divider"><span>{t("login.or")}</span></div>
 
           {/* Sign Up */}
           <p className="login-signup">
-            Don't have an account?{' '}
+            {t("login.noAccount")}{' '}
             <a href="#" onClick={(e) => { e.preventDefault(); navigate('/signup'); }}>
-              Sign Up Now
+              {t("login.signUpNow")}
             </a>
           </p>
         </div>
@@ -130,12 +141,12 @@ const Login = () => {
         {/* Language Bar */}
         <div className="login-lang-bar">
           <span className="globe-icon"><MdLanguage size={18} /></span>
-          <span className="lang-option active">English</span>
+          <span className={`lang-option ${i18n.language === 'en' ? 'active' : ''}`} onClick={() => i18n.changeLanguage('en')} style={{cursor: "pointer"}}>English</span>
           <span className="lang-sep">|</span>
-          <span className="lang-option">ਪੰਜਾਬੀ</span>
-          <span className="lang-sep">|</span>
-          <span className="lang-option">Hindi</span>
-          <span className="lang-sound"><MdVolumeUp size={18} /></span>
+          <span className={`lang-option ${i18n.language === 'hi' ? 'active' : ''}`} onClick={() => i18n.changeLanguage('hi')} style={{cursor: "pointer"}}>Hindi</span>
+          <span className="lang-sound" onClick={handleSpeak} style={{cursor: "pointer", display: "flex", alignItems: "center"}} title="Listen to Page Text">
+            <MdVolumeUp size={18} />
+          </span>
         </div>
       </div>
     </div>

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import "./HeroSection.css";
 import farmBg from "../../assets/farm-bg.jpeg";
 
 const HeroSection = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [location, setLocation] = useState('');
   const [coords, setCoords] = useState<{ lat: number; lng: number } | null>(null);
@@ -72,27 +74,27 @@ const HeroSection = () => {
     <section className="hero-section" style={{ backgroundImage: `url(${farmBg})` }}>
       <div className="hero-overlay" />
       <div className="hero-content">
-        <h1>Get AI-Driven Farm Insights</h1>
-        <p className="hero-sub">Smart Farming. Simple Decisions.</p>
+        <h1>{t("home.heroSection.title")}</h1>
+        <p className="hero-sub">{t("home.heroSection.subtitle")}</p>
         <div className="search-bar">
           <input
             type="text"
-            placeholder="Enter your location for personalized insights"
+            placeholder={t("home.heroSection.placeholder")}
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           />
-          <button onClick={handleSearch}>Search</button>
+          <button onClick={handleSearch}>{t("home.heroSection.search")}</button>
         </div>
         <div className="hero-location-tools">
           <button className="hero-location-btn" onClick={handleDetectLocation} disabled={detectingLocation}>
-            {detectingLocation ? 'Detecting...' : 'Use My Location'}
+            {detectingLocation ? t("home.heroSection.detecting") : t("home.heroSection.useLocation")}
           </button>
           {geoMessage && <span className="hero-location-message">{geoMessage}</span>}
         </div>
         <ul className="hero-features">
-          <li>• AI-Powered Crop, Livestock & Market Analysis</li>
-          <li>• Real-Time Weather, Soil & Price Alerts</li>
-          <li>• Government Schemes & Expert Advice</li>
+          <li>• {t("home.heroSection.featureOne")}</li>
+          <li>• {t("home.heroSection.featureTwo")}</li>
+          <li>• {t("home.heroSection.featureThree")}</li>
         </ul>
       </div>
     </section>

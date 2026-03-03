@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { FaUser, FaMapMarkerAlt, FaMobileAlt, FaKey } from "react-icons/fa";
-import { MdLandscape } from "react-icons/md";
+import { MdLandscape, MdVolumeUp } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, firebaseReady } from "../../lib/firebase";
 import "./Signup.css";
 
 const Signup = () => {
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [fullName, setFullName] = useState("");
   const [address, setAddress] = useState("");
@@ -59,6 +61,15 @@ const Signup = () => {
     }
   };
 
+  const handleSpeak = () => {
+    if (!("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    const textToSpeak = `${t("signup.title")}, ${t("signup.fullName")}, ${t("signup.address")}, ${t("signup.state")}, ${t("signup.city")}, ${t("signup.landArea")}, ${t("signup.mobileNumber")}, ${t("signup.email")}, ${t("signup.password")}, ${t("signup.enterOtp")}, ${t("signup.sendOtp")}, ${t("signup.saveDetails")}.`;
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+    utterance.lang = i18n.language === "hi" ? "hi-IN" : "en-US";
+    window.speechSynthesis.speak(utterance);
+  };
+
   return (
     <div className="signup-page">
       <div className="signup-bg" />
@@ -73,88 +84,89 @@ const Signup = () => {
           </div>
 
           <h2 className="signup-card-title">
-            <FaUser size={18} /> Farmer Profile Creation
+            <FaUser size={18} /> {t("signup.title")}
           </h2>
 
           {/* Full Name */}
           <div className="signup-input-group">
             <span className="input-icon"><FaUser size={16} /></span>
-            <input type="text" placeholder="Full Name" value={fullName} onChange={(e) => setFullName(e.target.value)} />
+            <input type="text" placeholder={t("signup.fullName")} value={fullName} onChange={(e) => setFullName(e.target.value)} />
           </div>
 
           {/* Address */}
           <div className="signup-input-group">
             <span className="input-icon"><FaMapMarkerAlt size={16} /></span>
-            <input type="text" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} />
+            <input type="text" placeholder={t("signup.address")} value={address} onChange={(e) => setAddress(e.target.value)} />
           </div>
 
           {/* State + City row */}
           <div className="signup-row">
             <div className="signup-input-group half">
               <span className="input-icon"><FaMapMarkerAlt size={14} /></span>
-              <input type="text" placeholder="State / Province" value={stateValue} onChange={(e) => setStateValue(e.target.value)} />
+              <input type="text" placeholder={t("signup.state")} value={stateValue} onChange={(e) => setStateValue(e.target.value)} />
             </div>
             <div className="signup-input-group half">
               <span className="input-icon"><FaMapMarkerAlt size={14} /></span>
-              <input type="text" placeholder="City / District" value={city} onChange={(e) => setCity(e.target.value)} />
+              <input type="text" placeholder={t("signup.city")} value={city} onChange={(e) => setCity(e.target.value)} />
             </div>
           </div>
 
           {/* Land Area */}
           <div className="signup-input-group">
             <span className="input-icon"><MdLandscape size={16} /></span>
-            <input type="number" placeholder="Total Land Area (Acres)" value={landArea} onChange={(e) => setLandArea(e.target.value)} />
+            <input type="number" placeholder={t("signup.landArea")} value={landArea} onChange={(e) => setLandArea(e.target.value)} />
           </div>
 
           {/* Mobile Number */}
           <div className="signup-input-group">
             <span className="input-icon"><FaMobileAlt size={16} /></span>
-            <input type="tel" placeholder="Mobile Number" value={mobile} onChange={(e) => setMobile(e.target.value)} />
+            <input type="tel" placeholder={t("signup.mobileNumber")} value={mobile} onChange={(e) => setMobile(e.target.value)} />
           </div>
 
           <div className="signup-input-group">
             <span className="input-icon"><FaUser size={16} /></span>
-            <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input type="email" placeholder={t("signup.email")} value={email} onChange={(e) => setEmail(e.target.value)} />
           </div>
 
           <div className="signup-input-group">
             <span className="input-icon"><FaKey size={16} /></span>
-            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input type="password" placeholder={t("signup.password")} value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
 
           {/* OTP row */}
           <div className="signup-otp-row">
             <div className="signup-input-group otp-input">
               <span className="input-icon"><FaKey size={14} /></span>
-              <input type="text" placeholder="Enter OTP" maxLength={6} value={otp} onChange={(e) => setOtp(e.target.value)} />
+              <input type="text" placeholder={t("signup.enterOtp")} maxLength={6} value={otp} onChange={(e) => setOtp(e.target.value)} />
             </div>
-            <button className="otp-btn" onClick={handleSendOtp}>Send OTP</button>
+            <button className="otp-btn" onClick={handleSendOtp}>{t("signup.sendOtp")}</button>
           </div>
 
           {/* Language Preference */}
-          <div className="signup-row lang-row">
-            <button className="lang-pref-btn">Language Preference</button>
-            <div className="lang-radio-group">
-              <label><input type="radio" name="lang" defaultChecked /> English</label>
+          <div className="signup-row lang-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <button className="lang-pref-btn">{t("signup.languagePref")}</button>
+            <div className="lang-radio-group" style={{ display: 'flex', alignItems: 'center' }}>
+              <label><input type="radio" name="lang" checked={i18n.language === 'en'} onChange={() => i18n.changeLanguage('en')} /> English</label>
               <span>|</span>
-              <label><input type="radio" name="lang" /> Hindi</label>
-              <span>|</span>
-              <label><input type="radio" name="lang" /> ਪੰਜਾਬੀ</label>
+              <label><input type="radio" name="lang" checked={i18n.language === 'hi'} onChange={() => i18n.changeLanguage('hi')} /> Hindi</label>
+              <span className="lang-sound" onClick={handleSpeak} style={{cursor: "pointer", display: "flex", alignItems: "center", marginLeft: "15px"}} title="Listen to Page Text">
+                <MdVolumeUp size={18} />
+              </span>
             </div>
           </div>
 
           {/* Save Button */}
           <button className="signup-save-btn" onClick={() => void handleSignup()} disabled={loading}>
-            {loading ? 'Saving...' : 'Save Details'}
+            {loading ? t("signup.saving") : t("signup.saveDetails")}
           </button>
 
           {message && <p className="signup-login-link">{message}</p>}
 
           {/* Already have account */}
           <p className="signup-login-link">
-            Already have an account?{' '}
+            {t("signup.alreadyAccount")}{' '}
             <a href="#" onClick={(e) => { e.preventDefault(); navigate('/login'); }}>
-              Log In
+              {t("signup.loginNow")}
             </a>
           </p>
 
