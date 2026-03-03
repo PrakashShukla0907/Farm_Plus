@@ -1,5 +1,5 @@
 import React from 'react';
-import './AIModelPage.css';
+import "./AIModelPage.css";
 // ── FPQI Scorer ──────────────────────────────────────────────
 const FPQIScorer: React.FC = () => {
   const [score, setScore] = React.useState<number | null>(null);

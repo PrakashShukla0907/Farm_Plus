@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import "./MarketDashboard.css";
 
 // Existing components (already in your project)
-// import Navbar from "../components/navbar";
+// import Navbar from "../Shared/Navbar";
 
 // New components
-import DomesticBidding from "../components/DomesticBidding";
-import ExportBidding from "../components/ExportBidding";
-import TrendingCrops from "../components/TrendingCrops";
-import ResourcesTips from "../components/ResourcesTips";
+import DomesticBidding from "./DomesticBidding";
+import ExportBidding from "./ExportBidding";
+import TrendingCrops from "./TrendingCrops";
+import ResourcesTips from "../Knowledge/ResourcesTips";
 
 const MarketDashboard: React.FC = () => {
   const navigate = useNavigate();

@@ -1,4 +1,4 @@
-import './KnowledgeHub.css';
+import "./KnowledgeHub.css";
 import { useNavigate } from 'react-router-dom';
 
 const KnowledgeHub = () => {

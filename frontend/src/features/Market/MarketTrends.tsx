@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './MarketTrends.css';
+import "./MarketTrends.css";
 
 interface PriceData {
   price: number;

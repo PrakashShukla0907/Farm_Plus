@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import './features.css';
+import "./Features.css";
 
 const CropIcon = () => (
   <svg viewBox="0 0 48 48" width="40" height="40" fill="none">

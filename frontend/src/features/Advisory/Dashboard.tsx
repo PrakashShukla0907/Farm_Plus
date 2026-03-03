@@ -13,8 +13,8 @@ import {
   type LivestockResponse,
   type PriceIntelligenceResponse,
   type RiskResponse,
-} from "../lib/api";
-import "./dashboard.css";
+} from "../../lib/api";
+import "./Dashboard.css";
 
 function getSeasonFromDate(date: Date) {
   // India: Rabi (Oct-Mar), Kharif (Jun-Oct), Zaid (Mar-Jun)

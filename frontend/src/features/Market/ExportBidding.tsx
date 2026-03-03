@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ExportBidding.css";
-import { getPriceIntelligence, getSellRecommendation } from "../lib/api";
+import { getPriceIntelligence, getSellRecommendation } from "../../lib/api";
 
 interface ExportOffer {
   id: string;
